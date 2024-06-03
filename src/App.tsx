@@ -1,13 +1,13 @@
 // src/App.tsx
 import React from "react";
-import WebcamComponent from "./components/HandLandmarkerComponent";
+import WebcamComponent from "./components/DetectionComponent";
 import "./App.css";
 import "./index.css";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <h1>Webcam Feed</h1>
+      <h1>Bite Buddy</h1>
       <WebcamComponent />
     </div>
   );
