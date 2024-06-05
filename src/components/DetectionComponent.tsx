@@ -7,7 +7,7 @@ import {
 } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
 import { drawLandmarks } from "@mediapipe/drawing_utils";
 
-const fingerTipIndices = [4, 8, 12, 16, 20];
+const FINGER_TIPS_IDS = [4, 8, 12, 16, 20];
 const mouthKeypointIndices = 3; // Adjust based on actual keypoints for mouth
 
 const NAIL_BITING_DISTANCE_THRESHOLD = 0.02; // Adjust this threshold based on your requirements
@@ -87,12 +87,13 @@ const WebcamComponent: React.FC = () => {
       canvas.height = video.videoHeight;
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      const result_hand = await handLandmarker.detect(video);
-      const results_face = await faceDetector.detect(video);
       let fingerTips = null;
       let mouthKeypoints = null;
 
-      //ToDO: add most make it for one person!
+      const [result_hand, results_face] = await Promise.all([
+        handLandmarker.detect(video),
+        faceDetector.detect(video),
+      ]);
 
       for (const detection of results_face.detections) {
         mouthKeypoints = detection.keypoints[mouthKeypointIndices];
@@ -103,7 +104,14 @@ const WebcamComponent: React.FC = () => {
       }
 
       for (const landmarks of result_hand.landmarks) {
-        fingerTips = fingerTipIndices.map((index) => landmarks[index]);
+        if (fingerTips) {
+          fingerTips = fingerTips.concat(
+            FINGER_TIPS_IDS.map((index) => landmarks[index])
+          );
+        } else {
+          fingerTips = FINGER_TIPS_IDS.map((index) => landmarks[index]);
+        }
+
         drawLandmarks(ctx, fingerTips, {
           color: "#FF0000",
           lineWidth: 1,
@@ -133,7 +141,7 @@ const WebcamComponent: React.FC = () => {
         console.log("Nail-biting detected!");
       }
     }
-    requestAnimationFrame(processFrame);
+    window.requestAnimationFrame(processFrame);
   }, [webcamRef, canvasRef, handLandmarker, faceDetector]);
 
   useEffect(() => {
@@ -161,7 +169,9 @@ const WebcamComponent: React.FC = () => {
   };
 
   return (
-    <div style={{ position: "relative", width: "640px", height: "480px" }}>
+    <div style={{ position: "relative", width: "75vh", height: "75vh" }}>
+      {" "}
+      {/* Adjusted for viewport height */}
       {(!isWebcamReady || isModelLoading) && (
         <div className="loader-container">
           <div className="loader"></div>
@@ -171,9 +181,14 @@ const WebcamComponent: React.FC = () => {
         audio={false}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={640}
-        height={480}
-        style={{ position: "absolute", opacity: 0 }}
+        width="100%"
+        height="100%"
+        style={{
+          position: "absolute",
+          opacity: 0,
+          width: "100%",
+          height: "100%",
+        }} // Width and height adjusted
         onUserMedia={handleWebcamReady}
       />
       <canvas
@@ -182,6 +197,8 @@ const WebcamComponent: React.FC = () => {
           position: "absolute",
           top: 0,
           left: 0,
+          width: "100%", // Ensure the canvas fills the parent
+          height: "100%",
           zIndex: 10,
           borderRadius: "20px",
         }}
