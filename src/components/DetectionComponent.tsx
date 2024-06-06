@@ -47,7 +47,7 @@ async function loadModel() {
   return [handLandmarker, faceDetector];
 }
 
-const WebcamComponent: React.FC = () => {
+const DetectionComponent: React.FC = () => {
   const [isModelLoading, setIsModelLoading] = useState(true);
   const [isWebcamReady, setIsWebcamReady] = useState(false);
   const [handLandmarker, setHandLandmarker] = useState<HandLandmarker | null>(
@@ -207,4 +207,4 @@ const WebcamComponent: React.FC = () => {
   );
 };
 
-export default WebcamComponent;
+export default DetectionComponent;
