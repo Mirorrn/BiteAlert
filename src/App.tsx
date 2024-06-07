@@ -9,13 +9,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import HeroSection from "./components/Hero";
 
 const App: React.FC = () => {
   return (
     <>
+      <HeroSection />
       <BrowserRouter>
         <NavBar />
         <Home />
+        <WebcamComponent />
         <Footer />
       </BrowserRouter>
     </>

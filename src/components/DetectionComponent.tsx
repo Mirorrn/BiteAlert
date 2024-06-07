@@ -6,6 +6,7 @@ import {
   FaceDetector,
 } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
 import { drawLandmarks } from "@mediapipe/drawing_utils";
+import { Container, Row, Col } from "react-bootstrap";
 
 const FINGER_TIPS_IDS = [4, 8, 12, 16, 20];
 const mouthKeypointIndices = 3; // Adjust based on actual keypoints for mouth
@@ -169,41 +170,33 @@ const DetectionComponent: React.FC = () => {
   };
 
   return (
-    <div style={{ position: "relative", width: "75vh", height: "75vh" }}>
-      {" "}
-      {/* Adjusted for viewport height */}
-      {(!isWebcamReady || isModelLoading) && (
-        <div className="loader-container">
-          <div className="loader"></div>
+<Container fluid className="home-section" id="home">
+  <Container className="home-content">
+    <Row className="home-row">
+      
+      <Col style={{ paddingBottom: 15 }}>
+        <div className="webcam-container">
+          {(!isWebcamReady || isModelLoading) && (
+            <div className="loader-container">
+              <div className="loader"></div>
+            </div>
+          )}
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            className="webcam"
+            onUserMedia={handleWebcamReady}
+          />
+          <canvas
+            ref={canvasRef}
+            className="canvas"
+          />
         </div>
-      )}
-      <Webcam
-        audio={false}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-        width="100%"
-        height="100%"
-        style={{
-          position: "absolute",
-          opacity: 0,
-          width: "100%",
-          height: "100%",
-        }} // Width and height adjusted
-        onUserMedia={handleWebcamReady}
-      />
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%", // Ensure the canvas fills the parent
-          height: "100%",
-          zIndex: 10,
-          borderRadius: "20px",
-        }}
-      />
-    </div>
+      </Col>
+    </Row>
+  </Container>
+</Container>
   );
 };
 

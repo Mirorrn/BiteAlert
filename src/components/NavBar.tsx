@@ -38,8 +38,12 @@ function NavBar() {
       className={navColour ? "sticky" : "navbar"}
     >
       <Container>
-
-      <strong className="main-name"> BiTE BOT</strong>
+        <img
+          src={logo}
+          alt="home pic"
+          className="img-fluid"
+          style={{ maxHeight: "64px", borderRadius: "20%" }}
+        />
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={() => {

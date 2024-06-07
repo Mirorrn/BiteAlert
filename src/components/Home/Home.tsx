@@ -5,18 +5,9 @@ import logo from "../assets/logo.png";
 function Home() {
   return (
     <section>
-      <Container fluid className="home-section" id="home">
+      <Container className="home-section" id="home">
         <Container className="home-content">
           <Row className="home-row">
-            <Col style={{ paddingBottom: 15 }}>
-              <img
-                src={"src/assets/logo.png"}
-                alt="home pic"
-                className="img-fluid"
-                style={{ maxWidth: "200px", borderRadius: "10%" }}
-              />
-            </Col>
-
             <h1 className="heading">
               Your Buddy to Help You Hop Away from Nail-Biting
             </h1>
