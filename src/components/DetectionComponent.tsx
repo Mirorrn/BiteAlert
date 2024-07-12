@@ -170,7 +170,6 @@ const DetectionComponent: React.FC = () => {
   };
 
   return (
-<Container fluid className="home-section" id="home">
   <Container className="home-content">
     <Row className="home-row">
       
@@ -196,7 +195,6 @@ const DetectionComponent: React.FC = () => {
       </Col>
     </Row>
   </Container>
-</Container>
   );
 };
 

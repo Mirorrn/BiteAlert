@@ -50,7 +50,8 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  background-color: #f8f9fa;
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
   padding: 0 !important; /* Remove default padding */
   margin: 0 !important;
 }
@@ -63,7 +64,7 @@ body {
 }
 
 .navbar-logo {
-  max-height: 100px; /* Maintain aspect ratio */
+  max-height: 50px; /* Maintain aspect ratio */
   width: auto; 
 }
 
@@ -200,6 +201,66 @@ body {
   }
 }
 
+.hero-section {
+  position: relative;
+}
+
+.video-container {
+  position: relative;
+}
+
+.video-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.35s;
+}
+
+.btn-transparent {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-transparent svg {
+  pointer-events: none; /* Ensure the SVG doesn't interfere with button clicks */
+  color: white;
+}
+
+.background-video {
+  width: 100%;
+  height: auto;
+}
 
 /* --------- */
 /* Home section */

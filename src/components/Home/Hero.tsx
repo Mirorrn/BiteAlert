@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import video from "../../assets/hero.webm";
-import { AiOutlinePlayCircle } from "react-icons/ai";
+import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
 
-
 const HeroSection = () => {
   const navigate = useNavigate();
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   const navigateToAbout = () => {
     navigate("/detection");
   };
+
+  const toggleVideoPlayback = () => {
+    if (isPlaying) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const updateProgress = () => {
+    const video = videoRef.current;
+    const progress = (video.currentTime / video.duration) * 100;
+    setProgress(progress);
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    video.addEventListener("timeupdate", updateProgress);
+    return () => {
+      video.removeEventListener("timeupdate", updateProgress);
+    };
+  }, []);
 
   return (
     <div className="hero-section">
@@ -34,7 +59,28 @@ const HeroSection = () => {
             </button>
           </div>
           <div className="col-md-6 video-container">
+            <div className="video-controls">
+              <button className="btn btn-transparent" onClick={toggleVideoPlayback}>
+                <svg className="progress-ring" width="70" height="70">
+                  <circle
+                    className="progress-ring__circle"
+                    stroke="white"
+                    strokeWidth="4"
+                    fill="transparent"
+                    r="30"
+                    cx="35"
+                    cy="35"
+                    style={{
+                      strokeDasharray: `${2 * Math.PI * 30}`,
+                      strokeDashoffset: `${2 * Math.PI * 30 - (progress / 100) * 2 * Math.PI * 30}`,
+                    }}
+                  />
+                </svg>
+                {isPlaying ? <AiOutlinePauseCircle size={50} /> : <AiOutlinePlayCircle size={50} />}
+              </button>
+            </div>
             <video
+              ref={videoRef}
               autoPlay
               loop
               muted
