@@ -8,19 +8,25 @@ import Home from "./components/Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import "./App.css";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import HeroSection from "./components/Hero";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 const App: React.FC = () => {
   return (
     <>
-      <HeroSection />
-      <BrowserRouter>
+      <Router>
         <NavBar />
-        <Home />
-        <WebcamComponent />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/detection" element={<WebcamComponent />} />
+          {/* Add more routes here as needed */}
+        </Routes>
         <Footer />
-      </BrowserRouter>
+      </Router>
     </>
   );
 };
