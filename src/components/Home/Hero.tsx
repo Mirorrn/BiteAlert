@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import video from "../../assets/hero.webm";
-import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
+import { CiPause1, CiPlay1 } from "react-icons/ci";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const navigate = useNavigate();
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
 
@@ -16,25 +16,29 @@ const HeroSection = () => {
 
   const toggleVideoPlayback = () => {
     if (isPlaying) {
-      videoRef.current.pause();
+      videoRef.current?.pause();
     } else {
-      videoRef.current.play();
+      videoRef.current?.play();
     }
     setIsPlaying(!isPlaying);
   };
 
   const updateProgress = () => {
-    const video = videoRef.current;
-    const progress = (video.currentTime / video.duration) * 100;
-    setProgress(progress);
+    const video = videoRef?.current;
+    if (video) {
+      const progress = (video.currentTime / video.duration) * 100;
+      setProgress(progress);
+    }
   };
 
   useEffect(() => {
     const video = videoRef.current;
-    video.addEventListener("timeupdate", updateProgress);
-    return () => {
-      video.removeEventListener("timeupdate", updateProgress);
-    };
+    if (video) {
+      video.addEventListener("timeupdate", updateProgress);
+      return () => {
+        video.removeEventListener("timeupdate", updateProgress);
+      };
+    }
   }, []);
 
   return (
@@ -55,30 +59,10 @@ const HeroSection = () => {
               <span className="tag">Secure</span>
             </div>
             <button className="btn btn-primary mt-3" onClick={navigateToAbout}>
-              <AiOutlinePlayCircle className="mr-2" /> Get Started
+              <CiPlay1 className="mr-2" /> Get Started
             </button>
           </div>
           <div className="col-md-6 video-container">
-            <div className="video-controls">
-              <button className="btn btn-transparent" onClick={toggleVideoPlayback}>
-                <svg className="progress-ring" width="70" height="70">
-                  <circle
-                    className="progress-ring__circle"
-                    stroke="white"
-                    strokeWidth="4"
-                    fill="transparent"
-                    r="30"
-                    cx="35"
-                    cy="35"
-                    style={{
-                      strokeDasharray: `${2 * Math.PI * 30}`,
-                      strokeDashoffset: `${2 * Math.PI * 30 - (progress / 100) * 2 * Math.PI * 30}`,
-                    }}
-                  />
-                </svg>
-                {isPlaying ? <AiOutlinePauseCircle size={50} /> : <AiOutlinePlayCircle size={50} />}
-              </button>
-            </div>
             <video
               ref={videoRef}
               autoPlay
@@ -89,6 +73,39 @@ const HeroSection = () => {
               <source src={video} type="video/webm" />
               Your browser does not support the video tag.
             </video>
+            <div className="video-controls">
+              <button
+                className="btn btn-transparent"
+                onClick={toggleVideoPlayback}
+              >
+                <div className="progress-ring-container">
+                  <svg className="progress-ring" width="70" height="70">
+                    <circle
+                      className="progress-ring__circle"
+                      stroke="white"
+                      strokeWidth="4"
+                      fill="transparent"
+                      r="30"
+                      cx="35"
+                      cy="35"
+                      style={{
+                        strokeDasharray: `${2 * Math.PI * 30}`,
+                        strokeDashoffset: `${
+                          2 * Math.PI * 30 - (progress / 100) * 2 * Math.PI * 30
+                        }`,
+                      }}
+                    />
+                  </svg>
+                  <div className="play-pause-icon">
+                    {isPlaying ? (
+                      <CiPause1 size={30} />
+                    ) : (
+                      <CiPlay1 size={30} />
+                    )}
+                  </div>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </Container>
