@@ -6,8 +6,6 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { AiOutlineHome, AiOutlinePlayCircle } from "react-icons/ai";
 
-import { CgFileDocument } from "react-icons/cg";
-
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);

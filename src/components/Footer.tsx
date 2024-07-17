@@ -20,7 +20,7 @@ function Footer() {
           <ul className="footer-icons d-flex justify-content-center">
             <li className="social-icons">
               <a
-                href="https://github.com/Mirorrn/BiteAlert"
+                href="https://github.com/Mirorrn/NailGuard"
                 style={{ color: "black" }}
                 target="_blank"
                 rel="noopener noreferrer"
