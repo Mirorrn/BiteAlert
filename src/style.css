@@ -6,39 +6,34 @@ body {
   padding-top: 60px; /* Adjust padding to account for the navbar height */
 }
 
-.btn-primary {
+.btn-primary, .btn-second {
   display: inline-block;
   font-size: 1.5rem; /* Increase the font size */
   padding: 1rem 2rem; /* Adjust the padding for a bigger button */
   border-radius: 0.5rem; /* Optional: adjust the border radius */
+  transition: background-color 0.3s ease; /* Smooth transition */
+  text-align: center;
+}
+
+.btn-primary {
   background-color: rgb(252, 97, 0); /* Set your desired background color */
   border: 1px solid rgb(243, 131, 61);
   color: white; /* Set your desired text color */
-  transition: background-color 0.3s ease; /* Smooth transition */
-  text-align: center;
 }
 
 .btn-primary:hover {
   background-color: rgb(209, 81, 1); /* Change background color on hover */
   border-color: rgb(209, 81, 1);
-  color: #ffffff; /* Change text color on hover */
 }
 
 .btn-second {
-  display: inline-block;
-  font-size: 1.5rem; /* Increase the font size */
-  padding: 1rem 2rem; /* Adjust the padding for a bigger button */
-  border-radius: 0.5rem; /* Optional: adjust the border radius */
   background-color: #dfe1e4; /* Set your desired background color */
   border: 1px solid #000000;
   color: rgb(0, 0, 0); /* Set your desired text color */
-  transition: background-color 0.3s ease; /* Smooth transition */
-  text-align: center;
 }
 
 .btn-second:hover {
   background-color: #cecbcc;
-  color: #000000;
 }
 
 .navbar {
@@ -47,8 +42,7 @@ body {
   background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
   backdrop-filter: blur(10px); /* Apply blur effect */
   padding: 0 1rem; /* Adjust padding */
-  margin: 0;
-  height: 60px; /* Fixed height */
+  height: 70px; /* Fixed height */
   position: fixed; /* Fix the navbar to the top */
   top: 0;
   width: 100%;
@@ -76,12 +70,10 @@ body {
   margin: 0 1rem; /* Adjust the margin */
 }
 
-/* Media query for smartphone mode */
 @media (max-width: 768px) {
   .navbar-nav .nav-link {
     font-size: 1.2rem; /* Increase the font size slightly for better readability on small screens */
-    padding-right: 1rem; /* Adjust padding */
-    padding-left: 1rem; /* Adjust padding */
+    padding: 0 1rem; /* Adjust padding */
   }
 
   .navbar-toggler {
@@ -89,7 +81,7 @@ body {
   }
 
   .navbar-nav .nav-item {
-    margin-left: 0; /* Adjust margin for better spacing */
+    margin: 0; /* Adjust margin for better spacing */
   }
 
   .navbar-nav .nav-item a {
@@ -98,7 +90,7 @@ body {
 }
 
 /* --------- */
-/* Hero section */
+/* Hero Section */
 /* --------- */
 
 .hero-section {
@@ -110,30 +102,16 @@ body {
   justify-content: center;
   background-color: #ffffff; /* Light background color for the hero section */
   z-index: 1; /* Ensure hero section is above other content */
-  padding-top: 60px; /* Adjust padding to account for the navbar height */
-  margin-bottom: 50px; /* Adjust this value based on your design */
+  padding-top: 80px; /* Adjust padding to account for the navbar height */
+  margin-bottom: 120px; /* Adjust this value based on your design */
 }
 
-.scroll-down-arrow {
-  position: absolute; /* Position the arrow relative to the hero section */
-  bottom: -40px; /* Adjust this value as needed to place the arrow just below the hero section */
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-  animation: bounce 2s infinite;
-}
+@media (max-width: 1400px) {
+  .hero-section {
+    padding-top: 300px; /* Adjust padding to account for the navbar height */
+    margin-bottom: 250px; /* Adjust this value based on your design */
+  }
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
 }
 
 .hero-card {
@@ -170,10 +148,6 @@ body {
   margin-top: 20px;
 }
 
-.btn-primary .mr-2 {
-  margin-right: 0.5rem;
-}
-
 .tags {
   display: flex;
   gap: 10px;
@@ -193,31 +167,6 @@ body {
 
 .tag:hover {
   background-color: #e2dfe0;
-  color: #000000;
-}
-
-/* Responsive design */
-@media (max-width: 800px) {
-  .hero-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .text-container, .video-container {
-    width: 100%;
-  }
-
-  .text-container {
-    align-items: center;
-  }
-
-  .btn-primary {
-    margin: 20px auto 0;
-  }
-
-  .video-container {
-    margin-top: 20px;
-  }
 }
 
 .video-container {
@@ -279,7 +228,7 @@ body {
 }
 
 /* --------- */
-/* Home section */
+/* Home Section */
 /* --------- */
 
 .home-content {
@@ -314,28 +263,48 @@ body {
 
 .footer {
   background-color: rgb(248, 249, 250);
-  bottom: 0;
-  padding-top: 10px;
-  padding-bottom: 8px;
+  padding: 20px 0; /* Add more padding for better spacing */
+  border-top: 1px solid #eaeaea; /* Add a border top for separation */
+  width: 100%;
+  overflow: hidden; /* Prevent overflow */
+}
+
+.footer-container {
+  max-width: 1140px; /* Match the max-width to your content width (Bootstrap container max-width) */
+  margin: 0 auto; /* Center the footer content */
+  padding: 0 15px; /* Add padding to match the Bootstrap container padding */
 }
 
 .footer-copywright, .footer-body {
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .footer h3 {
-  font-size: 1em;
+  font-size: 1.1em; /* Slightly increase font size for better readability */
   color: rgb(95, 99, 104);
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin: 0.5em 0;
 }
 
 .footer-icons {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  list-style-type: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.blockquote-footer {
-  color: #a588c0;
+.footer-icons li {
+  margin: 0 15px; /* Adjust margin for better spacing */
+}
+
+.footer-icons a {
+  font-size: 24px;
+  color: black; /* Default icon color */
+  transition: color 0.3s;
+}
+
+.footer-icons a:hover {
+  color: #007bff; /* Add a hover color */
 }
