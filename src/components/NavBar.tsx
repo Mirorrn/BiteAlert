@@ -4,7 +4,8 @@ import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { AiOutlineHome, AiOutlinePlayCircle } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
+import {CiPlay1 } from "react-icons/ci";
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
@@ -43,7 +44,7 @@ function NavBar() {
                 className="btn btn-second navbar-btn" // Add button classes here
                 onClick={() => updateExpanded(false)}
               >
-                <AiOutlinePlayCircle style={{ marginBottom: "2px" }} /> Get
+                <CiPlay1 style={{ marginBottom: "5px" }} /> Get
                 Started
               </Nav.Link>
             </Nav.Item>

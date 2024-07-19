@@ -7,25 +7,23 @@ import Home from "./components/Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App: React.FC = () => {
   return (
-    <>
+    <div className="page-container">
       <Router>
         <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/detection" element={<WebcamComponent />} />
-          {/* Add more routes here as needed */}
-        </Routes>
+        <div className="content-wrap">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/detection" element={<WebcamComponent />} />
+            {/* Add more routes here as needed */}
+          </Routes>
+        </div>
         <Footer />
       </Router>
-    </>
+    </div>
   );
 };
 

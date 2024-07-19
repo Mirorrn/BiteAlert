@@ -97,16 +97,20 @@ function Home() {
             <Col md={8}>
               <div className="text-content">
                 <p>
-                  The system employs a detector that continuously analyzes the
-                  input from your camera. It searches for the position of your
-                  mouth and the fingertips. By tracking these key points, the
-                  system can determine if your fingers are near or in contact
-                  with your mouth, indicating nail-biting behavior. When such
-                  behavior is detected, you will receive a gentle reminder to
-                  help you break the habit. This process ensures that all
-                  calculations are done locally on your device, maintaining your
-                  privacy and security.
+                  As a software developer with a specialized interest in
+                  data-driven decision making, I have gained extensive
+                  experience in both research and practice. My focus is on the
+                  use of artificial intelligence for analyzing human behavior
+                  and creating predictive models.
                 </p>
+                <p>
+                  While working on the computer, I often bite my fingernails or
+                  the skin around them. I often don't notice when exactly it
+                  happens, but it does. I have used various methods like gloves
+                  or smoothing the skin/nails, unfortunately without success so
+                  far. This inspired me to develop the NailGuard app.
+                </p>
+                <p>I hope the app helps you as much as it has helped me.</p>
               </div>
             </Col>
           </Row>

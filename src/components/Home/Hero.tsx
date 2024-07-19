@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import video from "../../assets/hero.webm";
 import { CiPause1, CiPlay1 } from "react-icons/ci";
 import Container from "react-bootstrap/Container";
@@ -59,7 +59,7 @@ const HeroSection = () => {
               <span className="tag">Secure</span>
             </div>
             <button className="btn btn-primary mt-3" onClick={navigateToAbout}>
-              <CiPlay1 className="mr-2" /> Get Started
+              <CiPlay1 style={{ marginBottom: "5px" }} className="mr-2" /> Get Started
             </button>
           </div>
           <div className="col-md-6 video-container">

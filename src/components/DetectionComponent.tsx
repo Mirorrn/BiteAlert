@@ -5,8 +5,8 @@ import {
   FilesetResolver,
   FaceDetector,
 } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
+
 import { drawLandmarks } from "@mediapipe/drawing_utils";
-import { Container, Row, Col } from "react-bootstrap";
 
 const FINGER_TIPS_IDS = [4, 8, 12, 16, 20];
 const mouthKeypointIndices = 3; // Adjust based on actual keypoints for mouth
@@ -83,9 +83,11 @@ const DetectionComponent: React.FC = () => {
     const canvas: HTMLCanvasElement = canvasRef.current;
     const ctx: CanvasRenderingContext2D | null = canvas.getContext("2d");
 
+    // Set canvas width and height to match video dimensions
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
     if (video && ctx) {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
       let fingerTips = null;
@@ -170,31 +172,23 @@ const DetectionComponent: React.FC = () => {
   };
 
   return (
-  <Container className="home-content">
-    <Row className="home-row">
-      
-      <Col style={{ paddingBottom: 15 }}>
-        <div className="webcam-container">
-          {(!isWebcamReady || isModelLoading) && (
-            <div className="loader-container">
-              <div className="loader"></div>
-            </div>
-          )}
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            className="webcam"
-            onUserMedia={handleWebcamReady}
-          />
-          <canvas
-            ref={canvasRef}
-            className="canvas"
-          />
+    <div className="detection-container">
+      {(!isWebcamReady || isModelLoading) && (
+        <div className="loader-container">
+          <div className="loader"></div>
         </div>
-      </Col>
-    </Row>
-  </Container>
+      )}
+      <div className="video-wrapper">
+        <Webcam
+          audio={false}
+          ref={webcamRef}
+          screenshotFormat="image/jpeg"
+          className="webcam"
+          onUserMedia={handleWebcamReady}
+        />
+        <canvas ref={canvasRef} className="canvas" />
+      </div>
+    </div>
   );
 };
 

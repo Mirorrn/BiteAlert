@@ -2,8 +2,20 @@
 /* Navbar Section  */
 /* --------- */
 
-body {
-  padding-top: 60px; /* Adjust padding to account for the navbar height */
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  flex: 1;
 }
 
 .btn-primary, .btn-second {
@@ -102,14 +114,14 @@ body {
   justify-content: center;
   background-color: #ffffff; /* Light background color for the hero section */
   z-index: 1; /* Ensure hero section is above other content */
-  padding-top: 80px; /* Adjust padding to account for the navbar height */
-  margin-bottom: 120px; /* Adjust this value based on your design */
+  padding-top: 250px; /* Adjust padding to account for the navbar height */
+  margin-bottom: 170px; /* Adjust this value based on your design */
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 800px) {
   .hero-section {
-    padding-top: 300px; /* Adjust padding to account for the navbar height */
-    margin-bottom: 250px; /* Adjust this value based on your design */
+    padding-top: 400px; /* Adjust padding to account for the navbar height */
+    margin-bottom: 350px; /* Adjust this value based on your design */
   }
 
 }
@@ -165,9 +177,6 @@ body {
   color: #000000;
 }
 
-.tag:hover {
-  background-color: #e2dfe0;
-}
 
 .video-container {
   position: relative;
@@ -308,3 +317,47 @@ body {
 .footer-icons a:hover {
   color: #007bff; /* Add a hover color */
 }
+
+
+/* Detection component */
+
+.detection-container {
+  position: relative; /* Changed from fixed to relative */
+  top: 100px; /* Adjust distance from the top */
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  background-color: #f8f9fa; /* Light grey background */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px; /* Add padding to ensure it doesn't touch screen edges */
+  margin: 0 auto 100px auto; /* Center horizontally and ensure space at the bottom to avoid collision with footer */
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio for the container */
+}
+
+.webcam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
