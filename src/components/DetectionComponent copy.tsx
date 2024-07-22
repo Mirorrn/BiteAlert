@@ -5,7 +5,7 @@ import {
   FilesetResolver,
   FaceDetector,
 } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
-import how__sound from "../assets/biting_hit.webm";
+
 import { drawLandmarks } from "@mediapipe/drawing_utils";
 
 const FINGER_TIPS_IDS = [4, 8, 12, 16, 20];
@@ -14,7 +14,6 @@ const mouthKeypointIndices = 3; // Adjust based on actual keypoints for mouth
 const NAIL_BITING_DISTANCE_THRESHOLD = 0.02; // Adjust this threshold based on your requirements
 const SLIDING_WINDOW_SIZE = 30; // Size of the sliding window
 const MAJORITY_THRESHOLD = 0.6; // Percentage of true frames to confirm nail-biting
-const COOLDOWN_TIME = 3000;
 
 const calculateDistance = (
   point1: { x: number; y: number },
@@ -62,18 +61,6 @@ const DetectionComponent: React.FC = () => {
   const currentIndex = useRef(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const webcamRef = useRef<Webcam>(null);
-  const canPlaySoundRef = useRef(true);
-
-  const playNailBitingSound = () => {
-    if (canPlaySoundRef.current) {
-      const audio = new Audio(how__sound);
-      audio.play();
-      canPlaySoundRef.current = false;
-      setTimeout(() => {
-        canPlaySoundRef.current = true;
-      }, COOLDOWN_TIME); // Adjust COOLDOWN_TIME to your desired cooldown period in milliseconds
-    }
-  };
 
   const processFrame = useCallback(async () => {
     if (
@@ -155,7 +142,6 @@ const DetectionComponent: React.FC = () => {
 
       if (trueCount / SLIDING_WINDOW_SIZE >= MAJORITY_THRESHOLD) {
         console.log("Nail-biting detected!");
-        playNailBitingSound(); // Trigger playing sound
       }
     }
     window.requestAnimationFrame(processFrame);
